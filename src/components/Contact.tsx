@@ -50,6 +50,10 @@ export default function Contact() {
     setErrorMsg('');
 
     try {
+      if (!supabase) {
+        throw new Error('Supabase is not configured for this deployment.');
+      }
+
       const { error } = await supabase.from('contact_submissions').insert({
         name: form.name,
         business: form.business || null,
